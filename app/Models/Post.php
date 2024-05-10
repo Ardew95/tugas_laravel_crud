@@ -13,13 +13,4 @@ class Post extends Model
         'title',
         'content',
     ];
-    public function allData()
-    {
-        return $this->db->table('post');
-    }
-    public function create()
-    {
-        $this->db->table('post')
-        ->insert($post);
-    }
 }

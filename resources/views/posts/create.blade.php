@@ -16,8 +16,8 @@
                 @csrf
                 <div class="mb-3">
                     <label for="gambar" class="form-label">Gambar Produk</label>
-                    <input type="url" class="form-control {{$errors->has('gambar') ? 'is-invalid' : ''}}" id="gambar" name="gambar">
-                    {{-- check error --}}
+                    <input type="file" class="form-control {{$errors->has('gambar') ? 'is-invalid' : ''}}" id="gambar" name="gambar" accept="image/jpeg, image/png">
+                    {{-- Periksa kesalahan --}}
                     @if ($errors->has('gambar'))
                         <div class="invalid-feedback">
                             {{ $errors->first('gambar') }}
@@ -26,60 +26,64 @@
                 </div>
                 <div class="mb-3">
                     <label for="nama" class="form-label">Nama Produk</label>
-                    <input type="text" class="form-control {{$errors->has('nama_produk') ? 'is-invalid' : ''}}" id="nama" name="nama">
+                    <input type="text" class="form-control {{$errors->has('nama') ? 'is-invalid' : ''}}" id="nama" name="nama" value="{{ old('nama') }}">
                     {{-- check error --}}
                     @if ($errors->has('nama'))
                         <div class="invalid-feedback">
-                            {{ $errors->first('nama') }}
+                            Kolom nama produk wajib diisi
                         </div>
                     @endif
                 </div>
                 <div class="mb-3">
                     <label for="berat" class="form-label">Berat</label>
-                    <input type="number" class="form-control {{$errors->has('berat') ? 'is-invalid' : ''}}" id="berat" name="berat">
+                    <input type="number" class="form-control
+                    {{$errors->has('berat') ? 'is-invalid' : ''}}" id="berat" name="berat" value="{{ old('berat') }}">
                     {{-- check error --}}
                     @if ($errors->has('berat'))
                         <div class="invalid-feedback">
-                            {{ $errors->first('berat') }}
+                            Kolom berat wajib diisi
                         </div>
                     @endif
                 </div>
                 <div class="mb-3">
                     <label for="harga" class="form-label">Harga</label>
-                    <input type="number" class="form-control {{$errors->has('harga') ? 'is-invalid' : ''}}" id="harga" name="harga">
+                    <input type="number" class="form-control
+                    {{$errors->has('harga') ? 'is-invalid' : ''}}" id="harga" name="harga" value="{{ old('harga') }}">
                     {{-- check error --}}
                     @if ($errors->has('harga'))
                         <div class="invalid-feedback">
-                            {{ $errors->first('harga') }}
+                            Kolom harga wajib diisi
                         </div>
                     @endif
                 </div>
                 <div class="mb-3">
                     <label for="stok" class="form-label">Stok</label>
-                    <input type="number" class="form-control {{$errors->has('stok') ? 'is-invalid' : ''}}" id="stok" name="stok">
+                    <input type="number" class="form-control
+                    {{$errors->has('stok') ? 'is-invalid' : ''}}" id="stok" name="stok" value="{{ old('stok') }}">
                     {{-- check error --}}
                     @if ($errors->has('stok'))
                         <div class="invalid-feedback">
-                            {{ $errors->first('stok') }}
+                            Kolom stok wajib diisi
                         </div>
                     @endif
                 </div>
                 <div class="mb-3">
-                    <label for="kondisi" class="form-label">Kondisi (Baru/Bekas)</label>
+                    <label for="kondisi" class="form-label">--Kondisi--</label>
                     <select class="form-select {{$errors->has('kondisi') ? 'is-invalid' : ''}}" id="kondisi" name="kondisi">
-                        <option value="Baru">Baru</option>
-                        <option value="Bekas">Bekas</option>
+                        <option value="Baru" {{ old('kondisi') == 'Baru' ? 'selected' : '' }}>Baru</option>
+                        <option value="Bekas" {{ old('kondisi') == 'Bekas' ? 'selected' : '' }}>Bekas</option>
                     </select>
                     {{-- check error --}}
                     @if ($errors->has('kondisi'))
                         <div class="invalid-feedback">
-                            {{ $errors->first('kondisi') }}
+                            Kolom kondisi wajib diisi
                         </div>
                     @endif
                 </div>
                 <div class="mb-3">
                     <label for="deskripsi" class="form-label">Deskripsi</label>
-                    <textarea class="form-control {{$errors->has('deskripsi') ? 'is-invalid' : ''}}" id="deskripsi" name="deskripsi" rows="3"></textarea>
+                    <textarea class="form-control
+                    {{$errors->has('deskripsi') ? 'is-invalid' : ''}}" id="deskripsi" name="deskripsi" rows="3" maxlength="2000">{{ old('deskripsi') }}</textarea>
                     {{-- check error --}}
                     @if ($errors->has('deskripsi'))
                         <div class="invalid-feedback">

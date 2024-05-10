@@ -32,18 +32,21 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'gambar' => 'required',
+            'gambar' => 'required|image|mimes:jpeg,png|max:2048',
             'nama' => 'required',
             'stok' => 'required',
             'berat' => 'required',
             'harga' => 'required',
             'kondisi' => 'required',
-            'deskripsi' => 'required',
+            'deskripsi' => 'required|max:2000',
         ]);
+
+        // Simpan gambar ke direktori penyimpanan (storage/app/public)
+        $gambarPath = $request->file('gambar')->store('public/gambar');
 
         // Simpan data ke dalam database
         $post = new Post();
-        $post->gambar = $request->gambar;
+        $post->gambar = basename($gambarPath);
         $post->nama = $request->nama;
         $post->stok = $request->stok;
         $post->berat = $request->berat;
@@ -63,13 +66,13 @@ class PostController extends Controller
 
     public function update(Request $request, $id) {
         $request->validate([
-            'gambar' => 'required',
+            'gambar' => 'required|image|mimes:jpeg,png|max:2000',
             'nama' => 'required',
             'stok' => 'required',
             'berat' => 'required',
             'harga' => 'required',
             'kondisi' => 'required',
-            'deskripsi' => 'required',
+            'deskripsi' => 'required|max:2000',
         ]);
         $post = Post::findOrFail($id);
         $post->gambar = $request->gambar;
